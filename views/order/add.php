@@ -5,8 +5,8 @@
  * @var \app\models\OrderItem[] $models
  * @var \yii\widgets\ActiveForm $form
  */
-
 $this->title = 'Add order';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <script type="application/template" id="order-item-row-template">

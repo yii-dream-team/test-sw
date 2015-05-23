@@ -41,7 +41,7 @@ class OrderItem extends ActiveRecord
     public function scenarios()
     {
         return [
-            static::SCENARIO_DEFAULT => ['!order_id', 'price', 'description', 'available']
+            static::SCENARIO_DEFAULT => ['price', 'description', 'available']
         ];
     }
 
