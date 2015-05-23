@@ -15,11 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= \yii\helpers\Html::textInput('OrderItem[:counter:][price]',
                 '', ['class' => 'form-control']) ?>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
             <?= \yii\helpers\Html::textInput('OrderItem[:counter:][description]',
                 '', ['class' => 'form-control']) ?>
         </div>
-        <div class="col-md-1">
+        <div class="col-md-2">
             <?= \yii\helpers\Html::checkbox('OrderItem[:counter:][available]',
                 false, ['class' => '']) ?>
         </div>
@@ -49,11 +49,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= \yii\helpers\Html::activeTextInput($model, "[$i]price", ['class' => 'form-control']) ?>
                 <?= \yii\helpers\Html::error($model, "[$i]price")?>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-4">
                 <?= \yii\helpers\Html::activeTextInput($model, "[$i]description", ['class' => 'form-control']) ?>
                 <?= \yii\helpers\Html::error($model, "[$i]description")?>
             </div>
-            <div class="col-md-1">
+            <div class="col-md-2">
                 <?= \yii\helpers\Html::activeCheckbox($model, "[$i]available", ['label' => null])?>
                 <?= \yii\helpers\Html::error($model, "[$i]available")?>
             </div>
