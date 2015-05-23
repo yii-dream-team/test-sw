@@ -36,7 +36,7 @@ AppAsset::register($this);
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
                     ['label' => 'Home', 'url' => ['/site/index']],
-                    ['label' => 'Add Order', 'url' => ['/order/index']],
+                    ['label' => 'Add Order', 'url' => ['/order/add']],
                     ['label' => 'Order Items', 'url' => ['/order-item/index']],
                 ],
             ]);
