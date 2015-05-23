@@ -11,7 +11,19 @@ class OrderController extends Controller
 {
     public function actionAdd()
     {
-        return $this->render('add');
+        $count = count(\Yii::$app->request->post('OrderItem', []));
+        $items = [new OrderItem()];
+        for($i = 1; $i < $count; $i++) {
+            $items[] = new OrderItem();
+        }
+
+        if(OrderItem::loadMultiple($items, \Yii::$app->request->post()) && OrderItem::validateMultiple($items)) {
+            exit;
+        }
+
+        return $this->render('add', [
+            'models' => $items
+        ]);
     }
 
     public function actionEdit($id)

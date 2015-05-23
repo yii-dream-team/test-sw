@@ -22,6 +22,7 @@ class AppAsset extends AssetBundle
         '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
     ];
     public $js = [
+        'js/order-item-form.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
