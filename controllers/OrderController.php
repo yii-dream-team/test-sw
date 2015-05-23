@@ -12,7 +12,8 @@ class OrderController extends Controller
 {
     public function actionAdd()
     {
-        $count = count(\Yii::$app->request->post('OrderItem', []));
+        $count = $this->getPostedItemsCount();
+
         $items = [new OrderItem()];
         for($i = 1; $i < $count; $i++) {
             $items[] = new OrderItem();
@@ -51,11 +52,17 @@ class OrderController extends Controller
 
         $models = $this->loadItems($orderId);
 
+        for ($i = count($models) + 1; $i <= $this->getPostedItemsCount(); $i++) {
+            $models[] =  new OrderItem([
+                'order_id' => $orderId,
+            ]);
+        }
+
         if (OrderItem::loadMultiple($models, \Yii::$app->request->post()) &&
             OrderItem::validateMultiple($models)) {
             $count = 0;
             foreach ($models as $item) {
-                if ($item->isDeleted)
+                if (!$item->isNewRecord && $item->isDeleted)
                     $item->delete();
                 else {
                     if ($item->save()) {
@@ -80,5 +87,13 @@ class OrderController extends Controller
     protected function loadItems($orderId)
     {
         return OrderItem::find()->where(['order_id' => $orderId])->orderBy('id')->all();
+    }
+
+    /**
+     * @return int
+     */
+    protected function getPostedItemsCount()
+    {
+        return count(\Yii::$app->request->post('OrderItem', []));
     }
 }
