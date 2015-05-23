@@ -32,18 +32,20 @@ class OrderItem extends ActiveRecord
     public function rules()
     {
         return [
-            [['order_id', 'price', 'description'], 'required'],
+            [['order_id', 'price', 'description'], 'required', 'when' => function($model) {
+                return $model->isDeleted == false;
+            }],
             [['order_id', 'available'], 'integer'],
             [['price'], 'number', 'min' => 0],
             [['description'], 'string', 'max' => 255],
-            ['available', 'boolean']
+            [['available', 'isDeleted'], 'boolean'],
         ];
     }
 
     public function scenarios()
     {
         return [
-            static::SCENARIO_DEFAULT => ['price', 'description', 'available']
+            static::SCENARIO_DEFAULT => ['price', 'description', 'available', 'isDeleted']
         ];
     }
 

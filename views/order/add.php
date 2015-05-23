@@ -20,12 +20,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 '', ['class' => 'form-control']) ?>
         </div>
         <div class="col-md-1">
-            <?= \yii\helpers\Html::checkbox('OrderItem[:counter:][price]',
+            <?= \yii\helpers\Html::checkbox('OrderItem[:counter:][available]',
                 false, ['class' => '']) ?>
         </div>
         <div class="col-md-2">
-            <a href="#" class="j-order-item-add-row"><span class="glyphicon glyphicon-plus"></span></a>
-            <a href="#" class="j-order-item-delete-row"><span class="glyphicon glyphicon-minus"></span></a>
+            <?= \yii\helpers\Html::button('<i class="fa fa-trash"></i>', ['class' => 'btn btn-danger j-order-item-delete-row']) ?>
+            <?= \yii\helpers\Html::hiddenInput('OrderItem[:counter:][isDeleted]', 0) ?>
         </div>
     </div>
 </script>
@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-md-2">Controls</div>
     </div>
     <?php foreach ($models as $i => $model): ?>
-        <div class="row order-item-row form-group">
+        <div class="row order-item-row form-group" <?= $model->isDeleted ? 'style="display: none"' : ''?>>
             <div class="col-md-2">
                 <?= \yii\helpers\Html::activeTextInput($model, "[$i]price", ['class' => 'form-control']) ?>
                 <?= \yii\helpers\Html::error($model, "[$i]price")?>
@@ -58,13 +58,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= \yii\helpers\Html::error($model, "[$i]available")?>
             </div>
             <div class="col-md-2">
-                <a href="#" class="j-order-item-add-row"><span class="glyphicon glyphicon-plus"></span></a>
-                <a href="#" class="j-order-item-delete-row"><span class="glyphicon glyphicon-minus"></span></a>
+                <?= \yii\helpers\Html::button('<i class="fa fa-trash"></i>', ['class' => 'btn btn-danger j-order-item-delete-row']) ?>
+                <?= \yii\helpers\Html::activeHiddenInput($model, "[$i]isDeleted") ?>
             </div>
         </div>
     <?php endforeach ?>
 </div>
-
+<div class="row">
+    <div class="col-md-2 col-md-offset-8">
+        <?= \yii\helpers\Html::button('<i class="fa fa-plus"></i>', ['class' => 'btn btn-success j-order-item-add-row']) ?>
+    </div>
+</div>
 <div class="form-group">
     <?= \yii\helpers\Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
 </div>
