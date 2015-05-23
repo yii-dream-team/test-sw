@@ -4,6 +4,7 @@
  */
 namespace app\controllers;
 
+use app\models\OrderItem;
 use yii\web\Controller;
 
 class OrderController extends Controller
@@ -13,8 +14,40 @@ class OrderController extends Controller
         return $this->render('add');
     }
 
-    public function actionEdit($orderId)
+    public function actionEdit($id)
     {
-        return $this->render('edit');
+        $orderId = intval($id);
+
+        $models = $this->loadItems($orderId);
+
+        if (OrderItem::loadMultiple($models, \Yii::$app->request->post()) &&
+            OrderItem::validateMultiple($models)) {
+            $count = 0;
+            foreach ($models as $item) {
+                if ($item->isDeleted)
+                    $item->delete();
+                else {
+                    if ($item->save()) {
+                        $count++;
+                    }
+                }
+            }
+            \Yii::$app->session->setFlash('success', "Processed {$count} records successfully.");
+            return $this->redirect(['edit', 'id' => $orderId]);
+        } else {
+            return $this->render('edit', [
+                'models' => $models,
+                'orderId' => $orderId,
+            ]);
+        }
+    }
+
+    /**
+     * @param int $orderId
+     * @return OrderItem[]
+     */
+    protected function loadItems($orderId)
+    {
+        return OrderItem::find()->where(['order_id' => $orderId])->orderBy('id')->all();
     }
 }

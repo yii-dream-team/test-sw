@@ -16,6 +16,8 @@ use yii\db\ActiveRecord;
  */
 class OrderItem extends ActiveRecord
 {
+    public $isDeleted = false;
+
     /**
      * @inheritdoc
      */
