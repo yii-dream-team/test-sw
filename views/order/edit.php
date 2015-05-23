@@ -5,6 +5,7 @@
  * @var $models \app\models\OrderItem[]
  */
 $this->title = 'Order #' . $orderId;
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <?php if (empty($models)): ?>

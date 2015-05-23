@@ -25,6 +25,8 @@ class OrderController extends Controller
             $dbTransaction = \Yii::$app->db->beginTransaction();
             try {
                 foreach($items as $item) {
+                    if($item->isDeleted)
+                        continue;
                     /** @var OrderItem $item */
                     $item->order_id = $orderId;
                     $item->save(false);
