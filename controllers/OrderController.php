@@ -65,6 +65,9 @@ class OrderController extends Controller
                 if (!$item->isNewRecord && $item->isDeleted)
                     $item->delete();
                 else {
+                    if($item->isDeleted)
+                        continue;
+
                     if ($item->save()) {
                         $count++;
                     }
