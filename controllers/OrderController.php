@@ -10,11 +10,11 @@ class OrderController extends Controller
 {
     public function actionAdd()
     {
-        throw new \BadMethodCallException('Not implemented');
+        return $this->render('add');
     }
 
     public function actionEdit($orderId)
     {
-        throw new \BadMethodCallException('Not implemented');
+        return $this->render('edit');
     }
 }
