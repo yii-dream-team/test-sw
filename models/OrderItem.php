@@ -36,14 +36,14 @@ class OrderItem extends ActiveRecord
             [['order_id', 'available'], 'integer'],
             [['price'], 'number', 'min' => 0],
             [['description'], 'string', 'max' => 255],
-            ['available', 'boolean']
+            [['available', 'isDeleted'], 'boolean']
         ];
     }
 
     public function scenarios()
     {
         return [
-            static::SCENARIO_DEFAULT => ['price', 'description', 'available']
+            static::SCENARIO_DEFAULT => ['price', 'description', 'available', 'isDeleted']
         ];
     }
 
