@@ -33,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="alert alert-danger">No items found</div>
 <?php else: ?>
     <?php $form = \yii\bootstrap\ActiveForm::begin([
+        'enableClientValidation' => false,
         'fieldConfig' => [
             'template' => '{input}{error}{hint}',
         ]
